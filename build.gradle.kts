@@ -5,7 +5,7 @@ plugins {
     //alias(libs.plugins.spotless)
     alias(libs.plugins.spring.boot) apply false
     alias(libs.plugins.spring.dependency.management) apply false
-    id("org.graalvm.buildtools.native") version "0.9.20"
+    id("org.graalvm.buildtools.native") version "0.10.3"
 }
 
 // Resolving the issue of not being able to reference the version catalog in allprojects and subprojects scopes
@@ -47,7 +47,7 @@ allprojects {
         kotlin {
             ktlint()
             trimTrailingWhitespace()
-        }
+        }serv
 
         kotlinGradle {
             ktlint()

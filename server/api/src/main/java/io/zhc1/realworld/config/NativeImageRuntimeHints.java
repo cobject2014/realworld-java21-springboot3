@@ -98,10 +98,31 @@ public class NativeImageRuntimeHints {
                         )
                     );
             
-            // Register Hibernate ColumnOrderingStrategyStandard for SPI instantiation
+            // Register Hibernate strategy classes for SPI instantiation
+            registerHibernateStrategyClass(hints, "org.hibernate.boot.model.relational.ColumnOrderingStrategyStandard");
+            registerHibernateStrategyClass(hints, "org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorBuilderImpl");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.enhanced.SequenceStyleGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.IdentityGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.Assigned");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.IncrementGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.SelectGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.UUIDGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.GUIDGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.UUIDHexGenerator");
+            registerHibernateStrategyClass(hints, "org.hibernate.id.enhanced.TableGenerator");
+            
+            // Register Hibernate DTD and XSD schema files as resources
+            hints.resources()
+                    .registerPattern("org/hibernate/*.dtd")
+                    .registerPattern("org/hibernate/*.xsd")
+                    .registerPattern("*.pub")
+                    .registerPattern("*.key");
+        }
+        
+        private void registerHibernateStrategyClass(@NonNull RuntimeHints hints, @NonNull String className) {
             hints.reflection()
                     .registerType(
-                        TypeReference.of("org.hibernate.boot.model.relational.ColumnOrderingStrategyStandard"),
+                        TypeReference.of(className),
                         builder -> builder.withMembers(
                             MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
                             MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
@@ -111,11 +132,6 @@ public class NativeImageRuntimeHints {
                             MemberCategory.DECLARED_FIELDS
                         )
                     );
-            
-            // Register Hibernate DTD and XSD schema files as resources
-            hints.resources()
-                    .registerPattern("org/hibernate/*.dtd")
-                    .registerPattern("org/hibernate/*.xsd");
         }
     }
 }
