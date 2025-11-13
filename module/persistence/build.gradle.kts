@@ -5,7 +5,8 @@ dependencies {
 
     implementation(libs.spring.boot.starter.data.jpa)
     implementation(libs.spring.boot.starter.cache)
-    implementation(libs.spring.boot.starter.p6spy)
+    // P6Spy is not compatible with GraalVM native images
+    // implementation(libs.spring.boot.starter.p6spy)
 
     implementation(libs.cache.caffeine)
 }

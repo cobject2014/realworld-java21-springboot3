@@ -1,0 +1,51 @@
+# Build artifacts
+build/
+**/build/
+target/
+**/target/
+*.jar
+*.war
+*.class
+
+# Gradle
+.gradle/
+**/.gradle/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README.md
+LICENSE
+CODE_OF_CONDUCT.md
+
+# Test files
+**/test/
+**/tests/
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Logs
+*.log
+logs/

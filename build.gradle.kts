@@ -2,9 +2,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     java
-    alias(libs.plugins.spotless)
+    //alias(libs.plugins.spotless)
     alias(libs.plugins.spring.boot) apply false
     alias(libs.plugins.spring.dependency.management) apply false
+    id("org.graalvm.buildtools.native") version "0.9.20"
 }
 
 // Resolving the issue of not being able to reference the version catalog in allprojects and subprojects scopes
@@ -18,22 +19,21 @@ allprojects {
             .get()
             .pluginId,
     )
-    plugins.apply(
-        versionCatalog.plugins.spotless
-            .get()
-            .pluginId,
-    )
+    // plugins.apply(
+    //     versionCatalog.plugins.spotless
+    //         .get()
+    //         .pluginId,
+    // )
 
     repositories {
         mavenCentral()
     }
 
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(versionCatalog.versions.java.get()))
-        }
+    tasks.withType<JavaCompile> {
+        options.release.set(versionCatalog.versions.java.get().toInt())
     }
 
+    /*
     spotless {
         java {
             palantirJavaFormat().formatJavadoc(true)
@@ -54,6 +54,7 @@ allprojects {
             trimTrailingWhitespace()
         }
     }
+    */
 }
 
 subprojects {
