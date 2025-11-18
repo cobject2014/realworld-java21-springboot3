@@ -2,7 +2,7 @@
 java = "17"
 spotless = "7.0.3"
 
-spring-boot = "3.3.0"
+spring-boot = "3.4.0"
 spring-dependency-management = "1.1.5"
 spring-boot-p6spy = "1.9.0"
 
